@@ -11,5 +11,13 @@
     "playlist"
   ],
   "author": "Geddy <g3ddylee@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "lodash": "^4.17.5"
+  },
+  "dependencies": {
+    "spotify-web-api-node": "^2.5.0"
+  }
 }

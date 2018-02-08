@@ -1,2 +1,3 @@
 build/
-settings.json
+settings/
+node_modules
