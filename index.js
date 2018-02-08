@@ -1,5 +1,16 @@
-const { clientId, cientSecret, redirectUri, authCode } = require('settings/settings')
+const express = require('express')
+const app = express()
 
-const spotifyApi = 
+app.use(express.static(__dirname + '/public'));
 
-console.log(settings);
+app.get('/', (req, res) => {
+  res.send('howdy')
+})
+
+// app.post('/newPlaylist', (req, res) => {
+// res.send('invalid')
+// })
+
+const server = app.listen(3000, () => {
+  console.log(`server operating on port ${server.address().port}`)
+})
