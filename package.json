@@ -15,9 +15,10 @@
   "devDependencies": {
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "lodash": "^4.17.5"
-  },
-  "dependencies": {
+    "grunt": "^1.0.2",
+    "grunt-contrib-uglify": "^3.3.0",
+    "load-grunt-tasks": "^3.5.2",
+    "lodash": "^4.17.5",
     "spotify-web-api-node": "^2.5.0"
   }
 }
