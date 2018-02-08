@@ -1,0 +1,15 @@
+{
+  "name": "spotifyplaylist",
+  "version": "0.0.1",
+  "description": "turns a track listing into a Spotify playlist",
+  "main": "index.js",
+  "scripts": {
+    "test": "./index.js"
+  },
+  "keywords": [
+    "spotify",
+    "playlist"
+  ],
+  "author": "Geddy",
+  "license": "ISC"
+}
