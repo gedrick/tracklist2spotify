@@ -5,4 +5,5 @@
 * track parsing regex
 * get spotify hookup working
 * get node:concurrent to use nodemon and watch tasks
-* figure out why watch task failing?
+* DONE figure out why watch task failing?
+* set up livereload

@@ -1,7 +1,7 @@
 // https://www.npmjs.com/package/grunt-contrib-stylus
 
 const stylus = {
-    stylus: {
+    stylesheets: {
         files: {
             'build/styles.css': ['public/css/**/*.styl']
         }
