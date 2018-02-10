@@ -13,8 +13,8 @@ const config = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  // grunt.registerTask('default', ['nodemon:dev', 'stylus', 'watch'])
-  grunt.registerTask('default', ['stylus', 'watch'])
+  grunt.registerTask('default', ['nodemon:dev', 'stylus', 'watch'])
+  // grunt.registerTask('default', ['stylus', 'watch'])
 }
 
 module.exports = config
