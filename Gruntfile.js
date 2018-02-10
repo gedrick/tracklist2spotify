@@ -1,20 +1,24 @@
+const stylus = require('./grunt/tasks/stylus')
 const nodemon = require('./grunt/tasks/nodemon')
 const watch = require('./grunt/tasks/watch')
-const stylus = require('./grunt/tasks/stylus')
+const concurrent = require('./grunt/tasks/concurrent');
 
 const config = (grunt) => {
+  require('load-grunt-tasks')(grunt)
+
   grunt.initConfig({
-    nodemon: nodemon,
     stylus: stylus,
-    watch: watch
+
+    // Set up to be used by grunt-concurrent.
+    nodemon: nodemon,
+    watch: watch,
+
+    concurrent: concurrent
   })
 
-  grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-
-  grunt.registerTask('default', ['nodemon:dev', 'stylus', 'watch'])
-  // grunt.registerTask('default', ['stylus', 'watch'])
+  grunt.registerTask('default', ['stylus', 'concurrent'])
+  // grunt.registerTask('default', ['concurrent', 'stylus'])
+  // grunt.registerTask('default', ['nodemon:dev', 'stylus', 'watch'])
 }
 
 module.exports = config
