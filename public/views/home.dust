@@ -1,13 +1,13 @@
 <h1>Welcome, {name}!</h1>
 <div class="step1">
   <h2>Please paste your tracklist into the textarea below.</h2>
-  <textarea id="track-list"></textarea><br/>
+  <textarea class="track-list"></textarea><br/>
   <button id="submit">Submit Tracks</button>
 </div>
 
 <div class="class2">
   <h2>Links to your tracks on Spotify:</h2>
-  <div id="spotify-tracks"></div>
+  <div class="spotify-tracks" id="spotify-tracks"></div>
 </div>
 
 <div class="step2">
