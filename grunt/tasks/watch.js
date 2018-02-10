@@ -8,6 +8,13 @@ const watch = {
             reload: true
             // livereload: true
         }
+    },
+    js: {
+      files: ['public/js/**/*.js'],
+      tasks: ['uglify'],
+      options: {
+        reload: true
+      }
     }
 }
 
