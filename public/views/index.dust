@@ -1,7 +1,7 @@
 {>"header"/}
 
 <body>
-    Welcome, {name}!
+    {>"home"/}
 </body>
 
 {>"footer"/}
