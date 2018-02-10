@@ -1,1 +1,7 @@
-This is the homepage, welcome {name}!
+{>"header"/}
+
+<body>
+    Welcome, {name}!
+</body>
+
+{>"footer"/}
