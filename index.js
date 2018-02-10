@@ -10,6 +10,7 @@ app.engine('dust', dust.engine());
 
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/build'));
 
 app.get('/', (req, res) => {
   res.render('index', {
