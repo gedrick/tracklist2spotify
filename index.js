@@ -1,5 +1,5 @@
-const express = require('express')
 const path = require('path')
+const express = require('express')
 const app = express()
 const dust = require('dustjs-express')
 
@@ -7,7 +7,6 @@ const dust = require('dustjs-express')
 app.set('views', path.join(__dirname, 'public/views'))
 app.set('view engine', 'dust')
 app.engine('dust', dust.engine());
-
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/build'));
