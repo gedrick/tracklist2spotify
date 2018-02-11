@@ -5,7 +5,8 @@
     <textarea class="track-list">
       {>"test/test-tracklist"/}
     </textarea>
-    <div class="track-list-parsed"></div>
+    <textarea class="track-list-parsed">
+    </textarea>
   </div>
   <br/>
   <button id="submit">Submit Tracks</button>
