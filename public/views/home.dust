@@ -1,8 +1,11 @@
 <h1>Welcome, {name}!</h1>
 <div class="step1">
   <h2>Please paste your tracklist into the textarea below.</h2>
-  <textarea class="track-list"></textarea><br/>
+  <textarea class="track-list">
+    {>"test/test-tracklist"/}
+  </textarea><br/>
   <button id="submit">Submit Tracks</button>
+  {>"regex"/}
 </div>
 
 <div class="class2">
