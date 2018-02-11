@@ -9,3 +9,4 @@
 * DONE get node:concurrent to use nodemon and watch tasks
 * DONE figure out why watch task failing?
 * DONE set up livereload
+* rig up browserify to use lodash/jquery on client side

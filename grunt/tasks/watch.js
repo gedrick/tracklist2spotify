@@ -10,8 +10,11 @@ const watch = {
         }
     },
     js: {
-      files: ['public/js/**/*.js'],
-      tasks: ['uglify'],
+      files: [
+        'public/js/**/*.js',
+        'static/**/*.js',
+      ],
+      tasks: ['browserify'],
       options: {
         reload: true
       }
