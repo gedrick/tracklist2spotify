@@ -11,6 +11,8 @@
 
 # TO DO
 
-* track parsing regexes
+* DONE track parsing regexes
 * get spotify hookup working
 * spotify search on client end
+* DONE sample regex exec
+* query youtube api for description
