@@ -41,10 +41,10 @@ app.get('/', (req, res) => {
     // Let's get the user data to render in the template.
     spotifyApi.getMe()
       .then(data => {
+        // Render index with the userData to be used in the personalization section.
         return res.render('index', {
           userData: data.body,
-          authorized: authorized,
-          name: data.body.display_name || data.body.id
+          authorized: authorized
         })
       })
       .catch(err => {
@@ -73,7 +73,7 @@ app.get('/signin', (req, res) => {
       spotifyApi.setRefreshToken(data.body['refresh_token'])
 
       res.setHeader('Set-Cookie', cookie.serialize('authCode', authCode, {
-        maxAge: 60,
+        maxAge: 60 * 60, // 1 hour
         httpOnly: true
       }));
 
