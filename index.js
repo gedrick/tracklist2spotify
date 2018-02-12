@@ -1,4 +1,5 @@
-
+'use strict'
+const cookie = require('cookie')
 const path = require('path')
 const express = require('express')
 const app = express()
@@ -11,8 +12,6 @@ const state = 'some-state'
 const spotifySettings = require('./config/settings.js')
 const spotifyApi = new SpotifyWebApi(spotifySettings)
 
-const authUrl = spotifyApi.createAuthorizeURL(scopes, state)
-
 // Set up dust templating.
 app.set('views', path.join(__dirname, 'public/views'))
 app.set('view engine', 'dust')
@@ -22,27 +21,39 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.static(__dirname + '/build'))
 
 app.get('/', (req, res) => {
+  const cookies = cookie.parse(req.headers.cookie || '')
+  let authorized = false
+  let authUrl = ''
+
+  if (cookies.authCode) {
+    authorized = true
+  } else {
+    authUrl = spotifyApi.createAuthorizeURL(scopes, state)
+  }
+
   res.render('index', {
     name: 'gedrick',
-    authUrl: authUrl
+    authUrl: authUrl,
+    authorized: authorized
   })
 })
 
 app.get('/signin', (req, res) => {
   // Grab query parameters
-  const code = req.query.code
-  const state = req.query.state
-  console.log(req.query)
-  spotifyApi.authorizationCodeGrant(code)
+  const authCode = req.query.code
+
+  // Authorize the code
+  spotifyApi.authorizationCodeGrant(authCode)
     .then(data => {
-      console.log(data)
-      console.log('The token expires in ' + data.body['expires_in'])
-      console.log('The access token is ' + data.body['access_token'])
-      console.log('The refresh token is ' + data.body['refresh_token'])
+      res.setHeader('Set-Cookie', cookie.serialize('authCode', authCode, {
+        maxAge: 60,
+        httpOnly: true
+      }));
       res.redirect('/')
     }, err => {
-      res.status(err.code)
-      res.send(err.message)
+      console.log(`ERROR in authorizationCodeGrant: ${err.message}`)
+      res.clearCookie('authCode')
+      res.redirect('/')
     })
 })
 

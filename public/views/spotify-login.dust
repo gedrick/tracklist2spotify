@@ -1,0 +1,7 @@
+<div class="spotify-login">
+  {#authorized}
+    Welcome back, {name}!
+  {:else}
+    <a href="{authUrl}">Click here to log in with Spotify</a>
+  {/authorized}
+</div>

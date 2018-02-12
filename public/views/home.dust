@@ -15,9 +15,7 @@
 
 <div class="class2">
   <h2>Links to your tracks on Spotify:</h2>
-  <div class="spotify-login">
-    <a href="{authUrl}">Click here to log in with Spotify</a>
-  </div>
+  {>"spotify-login"/}
   <div class="spotify-tracks" id="spotify-tracks"></div>
 </div>
 
