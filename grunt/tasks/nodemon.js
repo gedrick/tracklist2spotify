@@ -2,7 +2,7 @@ const nodemon = {
   dev: {
     script: 'index.js',
     options: {
-      // nodeArgs: ['--debug'],
+      nodeArgs: ['--inspect'],
       ignore: [
         'node_modules/**/*.js',
         'grunt/tasks/**/*.js',
