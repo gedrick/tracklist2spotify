@@ -12,6 +12,8 @@ const state = 'some-state'
 const spotifySettings = require('./config/settings.js')
 const spotifyApi = new SpotifyWebApi(spotifySettings)
 
+let spotifyAuthCode = ''
+
 // Set up dust templating.
 app.set('views', path.join(__dirname, 'public/views'))
 app.set('view engine', 'dust')
@@ -24,18 +26,40 @@ app.get('/', (req, res) => {
   const cookies = cookie.parse(req.headers.cookie || '')
   let authorized = false
   let authUrl = ''
+  let name = ''
 
   if (cookies.authCode) {
+    // The user has logged in already, set the authcode for all requests.
+    spotifyAuthCode = cookies.authCode
     authorized = true
   } else {
+    // If the user isn't logged in, create an auth url for them to click.
     authUrl = spotifyApi.createAuthorizeURL(scopes, state)
   }
 
-  res.render('index', {
-    name: 'gedrick',
-    authUrl: authUrl,
-    authorized: authorized
-  })
+  if (authorized) {
+    // Let's get the user data to render in the template.
+    spotifyApi.getMe()
+      .then(data => {
+        return res.render('index', {
+          userData: data.body,
+          authorized: authorized,
+          name: data.body.display_name || data.body.id
+        })
+      })
+      .catch(err => {
+        // They're no longer authorized. Let's kick them back to the homepage 
+        // and clear the authCode cookie so they can get a new one.
+        console.log(`Error while querying spotify API: ${err.message}`)
+        res.clearCookie('authCode')
+        res.redirect('/')
+      })
+  } else {
+    res.render('index', {
+      authUrl: authUrl,
+      authorized: authorized
+    })
+  }
 })
 
 app.get('/signin', (req, res) => {
@@ -45,10 +69,14 @@ app.get('/signin', (req, res) => {
   // Authorize the code
   spotifyApi.authorizationCodeGrant(authCode)
     .then(data => {
+      spotifyApi.setAccessToken(data.body['access_token'])
+      spotifyApi.setRefreshToken(data.body['refresh_token'])
+
       res.setHeader('Set-Cookie', cookie.serialize('authCode', authCode, {
         maxAge: 60,
         httpOnly: true
       }));
+
       res.redirect('/')
     }, err => {
       console.log(`ERROR in authorizationCodeGrant: ${err.message}`)

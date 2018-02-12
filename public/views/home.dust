@@ -1,4 +1,4 @@
-<h1>Welcome, {name}!</h1>
+<h1>Welcome, new user!</h1>
 <div class="step1">
   <h2>Please paste your tracklist into the textarea below.</h2>
   <div class="track-list-area">
