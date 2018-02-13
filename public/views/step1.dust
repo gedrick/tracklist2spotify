@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label for="track-list">Tracklist:</label>
+  <textarea class="form-control" rows="3" id="track-list">
+    {>"test/test-tracklist"/}
+  </textarea>
+  <textarea class="track-list-parsed"></textarea>
+
+  <button id="submit" class="btn btn-primary btn-large">Submit Tracks</button>
+</div>
