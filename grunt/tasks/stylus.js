@@ -2,9 +2,12 @@
 
 const stylus = {
   stylesheets: {
+    options: {
+      compress: false
+    },
     files: {
       'build/styles.css': [
-        'static/css/*.css',
+        'static/css/*.styl',
         'public/css/**/*.styl'
       ]
     }

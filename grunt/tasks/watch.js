@@ -2,7 +2,10 @@
 
 const watch = {
     css: {
-        files: ['public/css/**/*.styl'],
+        files: [
+          'public/css/**/*.styl',
+          'static/css/*.css'
+        ],
         tasks: ['stylus'],
         options: {
             reload: true
@@ -12,7 +15,7 @@ const watch = {
     js: {
       files: [
         'public/js/**/*.js',
-        'static/**/*.js',
+        'static/js/*.js',
       ],
       tasks: ['browserify'],
       options: {
