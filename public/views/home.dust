@@ -1,25 +1,32 @@
-<h1>Welcome, new user!</h1>
-<div class="step1">
-  <h2>Please paste your tracklist into the textarea below.</h2>
-  <div class="track-list-area">
-    <textarea class="track-list">
-      {>"test/test-tracklist"/}
-    </textarea>
-    <textarea class="track-list-parsed">
-    </textarea>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="hero-unit">
+      <h1>Welcome, new user!</h1>
+      <div class="step1">
+        <p>Please paste your tracklist into the textarea below.</h2>
+        <div class="track-list-area">
+          <textarea class="track-list">
+            {>"test/test-tracklist"/}
+          </textarea>
+          <textarea class="track-list-parsed">
+          </textarea>
+        </div>
+        <br/>
+        <button id="submit" class="btn btn-primary btn-large">Submit Tracks</button>
+        {>"regex"/}
+      </div>
+      
+      <div class="class2">
+        <h2>Links to your tracks on Spotify:</h2>
+        {>"spotify-login"/}
+        <div class="spotify-tracks" id="spotify-tracks"></div>
+      </div>
+      
+      <div class="step2">
+        Sign in with Spotify to make this tracklist into a playlist on your account.
+      </div>
+    </div>
   </div>
-  <br/>
-  <button id="submit">Submit Tracks</button>
-  {>"regex"/}
 </div>
 
-<div class="class2">
-  <h2>Links to your tracks on Spotify:</h2>
-  {>"spotify-login"/}
-  <div class="spotify-tracks" id="spotify-tracks"></div>
-</div>
-
-<div class="step2">
-  Sign in with Spotify to make this tracklist into a playlist on your account.
-</div>
 
