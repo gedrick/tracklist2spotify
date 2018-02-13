@@ -3,7 +3,10 @@
 const stylus = {
   stylesheets: {
     files: {
-      'build/styles.css': ['public/css/**/*.styl']
+      'build/styles.css': [
+        'static/css/*.css',
+        'public/css/**/*.styl'
+      ]
     }
   }
 }

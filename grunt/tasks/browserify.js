@@ -3,13 +3,13 @@
 const browserify = {
   options: {
     alias: {
-      'jquery': './static/jquery.min.js'
+      'jquery': './static/js/jquery.min.js'
     }
   },
   browserifyOptions: {
     dest: 'build/bundle.min.js',
     src: [
-      'static/*.js',
+      'static/js/*.js',
       'public/js/**/*.js'
     ]
   }

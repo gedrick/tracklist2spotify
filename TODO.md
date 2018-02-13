@@ -16,3 +16,4 @@
 * spotify search on client end
 * DONE sample regex exec
 * query youtube api for description
+* implement bootstrap
