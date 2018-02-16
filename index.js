@@ -8,9 +8,9 @@ const SpotifyWebApi = require('spotify-web-api-node')
 const YouTube = require('youtube-node')
 
 // Set up Spotify api.
-const scopes = ['playlist-read-private', 'playlist-modify-private', 'playlist-modify-public']
 const state = 'some-state'
 const configSettings = require('./config/settings.js')
+const scopes = configSettings.spotifyScopes
 const spotifyApi = new SpotifyWebApi({
   clientId: configSettings.clientId,
   clientSecret: configSettings.clientSecret,
@@ -80,7 +80,7 @@ app.get('/signin', (req, res) => {
       res.setHeader('Set-Cookie', cookie.serialize('authCode', authCode, {
         maxAge: 60 * 60, // 1 hour
         httpOnly: true
-      }));
+      }))
 
       res.redirect('/')
     }, err => {
