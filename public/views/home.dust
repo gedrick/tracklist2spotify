@@ -4,17 +4,14 @@
       <h1>tracklist2spotify</h1>
       <div class="step1">
         {>"step1"/}
-        {>"regex"/}
-      </div>
-      
-      <div class="class2">
-        <h2>Links to your tracks on Spotify:</h2>
-        {>"spotify-login"/}
-        <div class="spotify-tracks" id="spotify-tracks"></div>
       </div>
       
       <div class="step2">
-        Sign in with Spotify to make this tracklist into a playlist on your account.
+        {>"step2"/}
+      </div>
+      
+      <div class="step3">
+        {>"step3"/}
       </div>
     </div>
   </div>

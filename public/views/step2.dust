@@ -1,14 +1,16 @@
 <div class="spotify-login">
+  <h2>Links to your tracks on Spotify:</h2>
   {#authorized}
-    Welcome back, 
+    <p>Welcome back, 
       {#userData.display_name}
         {userData.display_name}
       {:else}
         {userData.id}
       {/userData.display_name}
-    !
+    !</p>
     <div class="spotify-user-image"><img src="{userData.images[0].url}"/></div>
   {:else}
     <a href="{authUrl}">Click here to log in with Spotify</a>
   {/authorized}
+  <div class="spotify-tracks" id="spotify-tracks"></div>
 </div>

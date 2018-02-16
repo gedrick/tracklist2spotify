@@ -1,9 +1,14 @@
 <div class="form-group">
-  <label for="track-list">Tracklist:</label>
+  <p>Enter the YouTube URL:</p>
+  <input type="text" id="youtube-url"/>
+
+  <p>Or, paste the tracklist:</p>
   <textarea class="form-control" rows="3" id="track-list">
     {>"test/test-tracklist"/}
   </textarea>
-  <textarea class="track-list-parsed"></textarea>
+
+  {>"regex"/}
+  <!--<textarea class="track-list-parsed"></textarea>-->
 
   <button id="submit" class="btn btn-primary btn-large">Submit Tracks</button>
 </div>
