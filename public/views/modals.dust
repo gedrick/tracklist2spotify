@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Sorry, the description was unable to be pulled from this YouTube video.
+        Sorry, the description was unable to be pulled from this YouTube video, or the video URL is invalid.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

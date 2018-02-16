@@ -70,6 +70,7 @@ const extractTrackList = obj => {
     const description = items[0].snippet.description
     ui.trackList.val(description)
   } else {
+    ui.trackList.val('')
     ui.errorModal.modal()
   }
   inputChanged()

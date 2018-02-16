@@ -1,7 +1,7 @@
 <label>Paste a YouTube URL to have the track list automatically pulled out of the description:</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text">YouTube URL:</span>
+    <span class="input-group-text">URL:</span>
   </div>
   <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/>
   <div class="input-group-append">
@@ -13,7 +13,7 @@
 
 <div class="form-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text">Tracklist (delete all extra text so the preview is only tracks you want!):</span>
+    <span class="input-group-text">Tracklist</span>
   </div>
   <textarea class="form-control" id="tracklist" rows="5" aria-label="With textarea">
 
@@ -30,7 +30,7 @@
 
   <div class="form-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text">Preview your Tracks:</span>
+      <span class="input-group-text">Preview Tracks</span>
     </div>
     <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly></textarea>
   </div>  
