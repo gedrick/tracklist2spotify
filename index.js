@@ -17,8 +17,6 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: configSettings.redirectUri
 })
 
-let spotifyAuthCode = ''
-
 // Set up dust templating.
 app.set('views', path.join(__dirname, 'public/views'))
 app.set('view engine', 'dust')
@@ -35,7 +33,6 @@ app.get('/', (req, res) => {
 
   if (cookies.authCode) {
     // The user has logged in already, set the authcode for all requests.
-    spotifyAuthCode = cookies.authCode
     authorized = true
   } else {
     // If the user isn't logged in, create an auth url for them to click.
@@ -70,6 +67,7 @@ app.get('/', (req, res) => {
 app.get('/signin', (req, res) => {
   // Grab query parameters
   const authCode = req.query.code
+  let cookies = []
 
   // Authorize the code
   spotifyApi.authorizationCodeGrant(authCode)
@@ -77,11 +75,10 @@ app.get('/signin', (req, res) => {
       spotifyApi.setAccessToken(data.body['access_token'])
       spotifyApi.setRefreshToken(data.body['refresh_token'])
 
-      res.setHeader('Set-Cookie', cookie.serialize('authCode', authCode, {
-        maxAge: 60 * 60, // 1 hour
-        httpOnly: true
-      }))
+      cookies.push(cookie.serialize('accessToken', data.body['access_token'], { maxAge: 60 * 60 * 60, httpOnly: true }))
+      cookies.push(cookie.serialize('authCode', authCode, { maxAge: 60 * 60 * 60, httpOnly: true }))
 
+      res.setHeader('Set-Cookie', cookies)
       res.redirect('/')
     }, err => {
       console.log(`ERROR in authorizationCodeGrant: ${err.message}`)
