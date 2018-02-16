@@ -6,6 +6,7 @@ const app = express()
 const dust = require('dustjs-express')
 const SpotifyWebApi = require('spotify-web-api-node')
 const YouTube = require('youtube-node')
+const Spotify = require('./lib/spotify')
 
 // Set up Spotify api.
 const state = 'some-state'
@@ -87,7 +88,7 @@ app.get('/signin', (req, res) => {
     })
 })
 
-app.get('/youtube/:id', (req, res) => {
+app.get('/youtube', (req, res) => {
   const youtube = new YouTube()
   youtube.setKey(configSettings.youtubeKey)
   youtube.getById(req.query.id, (error, result) => {
@@ -97,6 +98,14 @@ app.get('/youtube/:id', (req, res) => {
       res.send(result)
     }
   })
+})
+
+app.get('/searchTracks', (req, res) => {
+  const tracklist = req.query.tracklist
+  Spotify.searchTracks(spotifyApi, tracklist)
+    .then(results => {
+      res.send(results)
+    })
 })
 
 const server = app.listen(3000, () => {

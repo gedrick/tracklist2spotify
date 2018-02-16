@@ -32,7 +32,9 @@
     <div class="input-group-prepend">
       <span class="input-group-text">Preview Tracks</span>
     </div>
-    <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly></textarea>
+    <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly>
+      {>"test/test-tracklist-small"/}
+    </textarea>
   </div>  
 </div>
 
