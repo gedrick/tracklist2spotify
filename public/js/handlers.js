@@ -2,6 +2,8 @@ const $ = require('jquery')
 const _ = require('lodash')
 
 const ui = {
+  step1: $('.step1'),
+  step2: $('.step2'),
   youtubeUrl: $('#youtube-url'),
   btnGrabTracks: $('#btn-grab-tracks'),
   
@@ -92,6 +94,8 @@ const processTracks = () => {
 
 displayTrackList = html => {
   ui.spotifyResults.html(html);
+  ui.step1.hide()
+  ui.step2.hide()
 }
 
 module.exports = {
