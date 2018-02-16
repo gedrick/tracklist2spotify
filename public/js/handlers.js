@@ -9,6 +9,7 @@ const ui = {
   selector: $('#regex-select'),
   preview: $('#tracklist-preview'),
 
+  errorModal: $('#errorModal'),
   previewContainer: $('.tracklist-preview-container')
 }
 
@@ -68,6 +69,8 @@ const extractTrackList = obj => {
   if (items.length > 0) {
     const description = items[0].snippet.description
     ui.trackList.val(description)
+  } else {
+    ui.errorModal.modal()
   }
   inputChanged()
 }

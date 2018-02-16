@@ -6,7 +6,8 @@ const browserify = {
       debug: true
     },
     alias: {
-      'jquery': './static/js/jquery.min.js'
+      'jquery': './static/js/jquery.min.js',
+      'popper.js': './static/js/popper.js'
     }
   },
   browserifyOptions: {
