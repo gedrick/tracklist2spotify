@@ -1,5 +1,6 @@
 const $ = require('jquery')
 const _ = require('lodash')
+const spotify = require('./spotify')
 
 const ui = {
   youtubeUrl: $('#youtube-url'),
@@ -10,16 +11,8 @@ const ui = {
   preview: $('#tracklist-preview'),
 
   errorModal: $('#errorModal'),
+  spotifyErrorModal: $('#spotifyErrorModal'),
   previewContainer: $('.tracklist-preview-container')
-}
-
-
-/**
- * Queries Spotify for the list of given tracks.
- * @param {*} event 
- */
-const processTracks = (event) => {
-  console.log('processing tracks...')
 }
 
 /**
@@ -81,8 +74,22 @@ const extractYouTubeID = url => {
   return regex.exec(url)[1] || false
 }
 
+/**
+ * Queries Spotify for the list of given tracks.
+ * @param {*} event 
+ */
+const processTracks = () => {
+  const tracks = spotify.searchTracks(ui.preview.val())
+  if (!tracks) {
+    ui.spotifyErrorModal.modal();
+  } else {
+    console.log(tracks)
+  }
+}
+
 module.exports = {
   processTracks: processTracks,
   inputChanged: inputChanged,
-  grabYouTubeTracks: grabYouTubeTracks
+  grabYouTubeTracks: grabYouTubeTracks,
+  processTracks: processTracks
 }
