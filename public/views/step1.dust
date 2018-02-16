@@ -24,7 +24,7 @@
   <div class="input-group mb-3">
     {>"regex"/}
     <div class="input-group-prepend">
-      <button id="btn-preview" class="btn btn-outline-secondary" type="button">Update Preview</button>
+      <button id="btn-preview" class="btn btn-outline-secondary" type="button">Extract Tracks</button>
     </div>
   </div>
 

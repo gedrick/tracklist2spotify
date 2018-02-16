@@ -1,6 +1,6 @@
 <select class="custom-select" id="regex-select">
   <option>Choose pattern...</option>
-  <option value="artist-title" data-regex="^(.*)-(.*)$" selected>(Artist) - (Title)</option>
+  <option value="artist-title" data-regex="^(.*) - (.*)$" selected>(Artist) - (Title)</option>
   <option value="2">Two</option>
   <option value="3">Three</option>
 </select>

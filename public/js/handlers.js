@@ -68,8 +68,8 @@ const extractTrackList = obj => {
   if (items.length > 0) {
     const description = items[0].snippet.description
     ui.trackList.val(description)
-    inputChanged()
   }
+  inputChanged()
 }
 
 const extractYouTubeID = url => {
