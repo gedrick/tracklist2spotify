@@ -36,4 +36,4 @@
   </div>  
 </div>
 
-<button id="submit" class="btn btn-primary btn-large">Submit Tracks</button>
+<button id="submit-tracks" class="btn btn-primary btn-large">Submit Tracks</button>
