@@ -4,6 +4,7 @@
   <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     {>"home"/}
   </div>
+  <a class="github-fork-ribbon right-bottom" href="https://github.com/gedrick/tracklist2spotify" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
 </body>
 
 {>"footer"/}
