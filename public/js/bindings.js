@@ -3,7 +3,7 @@ const handlers = require('./handlers')
 
 const setupBindings = () => {
   $('#submit').on('click', handlers.processTracks)
-  $('.track-list').on('input propertychange', handlers.testRegex)
+  $('#tracklist').on('input propertychange', handlers.inputChanged)
 }
 
 module.exports = {

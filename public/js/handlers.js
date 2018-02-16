@@ -1,9 +1,14 @@
 const $ = require('jquery')
 const _ = require('lodash')
 const ui = {
+  youtubeUrl: $('#youtube-url'),
+  btnGrabTracks: $('#btn-grab-tracks'),
+  
+  trackList: $('#tracklist'),
   selector: $('#regex-select'),
-  input: $('.track-list'),
-  output: $('.track-list-parsed')
+  preview: $('#tracklist-preview'),
+
+  previewContainer: $('.tracklist-preview-container')
 }
 
 
@@ -21,7 +26,7 @@ const processTracks = (event) => {
  */
 const testRegex = (event) => {
   const regex = new RegExp(ui.selector.children(':selected').data('regex'))
-  const input = ui.input.val()
+  const input = ui.trackList.val()
 
   const tracks = input.split('\n')
   let match
@@ -33,10 +38,20 @@ const testRegex = (event) => {
     }
   });
 
-  ui.output.val(output)
+  ui.preview.val(output)
+}
+
+const inputChanged = (event) => {
+  const content = event.currentTarget.innerHTML
+  ui.previewContainer.toggle(content.trim() !== '')
+  ui.preview.val('')
+  if (content.trim() !== '') {
+    testRegex()
+  }
 }
 
 module.exports = {
   processTracks: processTracks,
-  testRegex: testRegex
+  testRegex: testRegex,
+  inputChanged: inputChanged
 }

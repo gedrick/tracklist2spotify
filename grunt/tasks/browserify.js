@@ -2,6 +2,9 @@
 
 const browserify = {
   options: {
+    browserifyOptions: {
+      debug: true
+    },
     alias: {
       'jquery': './static/js/jquery.min.js'
     }

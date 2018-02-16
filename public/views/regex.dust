@@ -1,5 +1,6 @@
-<h3>Advanced</h3>
-<p>Select the pattern to extract the track artist/name.</p>
-<select id="regex-select">
-  <option value="artist-title" data-regex="^(.*)-(.*)$" selected="selected">Artist - Title</option>
+<select class="custom-select" id="regex-select">
+  <option>Choose pattern...</option>
+  <option value="artist-title" data-regex="^(.*)-(.*)$" selected>(Artist) - (Title)</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
 </select>
