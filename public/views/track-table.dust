@@ -1,0 +1,24 @@
+<div class="table-responsive table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Artist</th>
+        <th scope="col">Track Title</th>
+        <th scope="col">Album</th>
+        <th scope="col">Sample</th>
+        <th scope="col">Cover</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#results}
+        <tr>
+          <td>{artist}</td>
+          <td><a href="{trackUrl}">{track}</a></td>
+          <td>{album}</td>
+          <td>[preview]</td>
+          <td><img src="{albumArt}"/></td>
+        </tr>
+      {/results}
+    </tbody>
+  </table>
+</div>

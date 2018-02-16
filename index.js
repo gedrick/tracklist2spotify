@@ -104,17 +104,13 @@ app.get('/searchTracks', (req, res) => {
   const tracklist = req.query.tracklist
   Spotify.searchTracks(spotifyApi, tracklist)
     .then(results => {
-      res.send(results)
+      res.render('track-table', { results: results })
     })
 })
 
 const server = app.listen(3000, () => {
   console.log(`server operating on port ${server.address().port}`)
 })
-
-// app.post('/searchTrack/:searchTerms', (req, res) => {
-//   res.send('invalid')
-// })
 
 // app.post('/createPlaylist/:trackList', (req, res) => {
 //   res.send('failed')

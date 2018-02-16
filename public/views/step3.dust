@@ -1,1 +1,11 @@
-<p>Sign in with Spotify to make this tracklist into a playlist on your account.</p>
+<div class="container-fluid">
+  <div class="">
+    Your playlists
+  </div>
+  <div class="">
+    Create a new playlist
+  </div>
+</div>
+<div class="row-fluid">
+  
+</div>

@@ -11,9 +11,10 @@
     
     <div class="step3 hero-unit">
       {>"step3"/}
-    </div>
+      <div id="spotifyResults"></div>
     </div>
   </div>
+</div>
 </div>
 
 

@@ -11,7 +11,9 @@ const ui = {
 
   errorModal: $('#errorModal'),
   spotifyErrorModal: $('#spotifyErrorModal'),
-  previewContainer: $('.tracklist-preview-container')
+  previewContainer: $('.tracklist-preview-container'),
+
+  spotifyResults: $('#spotifyResults')
 }
 
 /**
@@ -88,8 +90,8 @@ const processTracks = () => {
   }
 }
 
-displayTrackList = trackList => {
-  console.log(trackList)
+displayTrackList = html => {
+  ui.spotifyResults.html(html);
 }
 
 module.exports = {
