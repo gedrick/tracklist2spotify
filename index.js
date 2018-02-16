@@ -5,12 +5,17 @@ const express = require('express')
 const app = express()
 const dust = require('dustjs-express')
 const SpotifyWebApi = require('spotify-web-api-node')
+const YouTube = require('youtube-node')
 
 // Set up Spotify api.
 const scopes = ['playlist-read-private', 'playlist-modify-private', 'playlist-modify-public']
 const state = 'some-state'
-const spotifySettings = require('./config/settings.js')
-const spotifyApi = new SpotifyWebApi(spotifySettings)
+const configSettings = require('./config/settings.js')
+const spotifyApi = new SpotifyWebApi({
+  clientId: configSettings.clientId,
+  clientSecret: configSettings.clientSecret,
+  redirectUri: configSettings.redirectUri
+})
 
 let spotifyAuthCode = ''
 
@@ -83,6 +88,18 @@ app.get('/signin', (req, res) => {
       res.clearCookie('authCode')
       res.redirect('/')
     })
+})
+
+app.get('/youtube/:id', (req, res) => {
+  const youtube = new YouTube()
+  youtube.setKey(configSettings.youtubeKey)
+  youtube.getById(req.query.id, (error, result) => {
+    if (error) {
+      res.send(error)
+    } else {
+      res.send(result)
+    }
+  })
 })
 
 const server = app.listen(3000, () => {

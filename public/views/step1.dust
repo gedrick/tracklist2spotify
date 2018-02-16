@@ -3,7 +3,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text">YouTube URL:</span>
   </div>
-  <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" aria-label="Username"/>
+  <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/>
   <div class="input-group-append">
     <button id="btn-grab-tracks" class="btn btn-outline-secondary" type="button">Grab Tracks</button>
   </div>
@@ -13,10 +13,10 @@
 
 <div class="form-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text">Tracklist:</span>
+    <span class="input-group-text">Tracklist (delete all extra text so the preview is only tracks you want!):</span>
   </div>
   <textarea class="form-control" id="tracklist" rows="5" aria-label="With textarea">
-    {>"test/test-tracklist"/}
+
   </textarea>
 </div>
 
@@ -32,7 +32,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text">Preview your Tracks:</span>
     </div>
-    <textarea class="form-control" id="tracklist-preview" rows="3" aria-label="With textarea" readonly></textarea>
+    <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly></textarea>
   </div>  
 </div>
 

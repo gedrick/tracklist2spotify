@@ -1,5 +1,6 @@
 const $ = require('jquery')
 const _ = require('lodash')
+
 const ui = {
   youtubeUrl: $('#youtube-url'),
   btnGrabTracks: $('#btn-grab-tracks'),
@@ -42,7 +43,7 @@ const testRegex = (event) => {
 }
 
 const inputChanged = (event) => {
-  const content = event.currentTarget.innerHTML
+  const content = ui.trackList.val()
   ui.previewContainer.toggle(content.trim() !== '')
   ui.preview.val('')
   if (content.trim() !== '') {
@@ -50,8 +51,34 @@ const inputChanged = (event) => {
   }
 }
 
+const grabYouTubeTracks = () => {
+  const youtubeUrl = ui.youtubeUrl.val().trim()
+  const videoID = extractYouTubeID(youtubeUrl)
+  if (youtubeUrl === '' || !videoID) {
+    return
+  }
+
+  $.get(`/youtube/${videoID}`, {
+    id: videoID
+  }, extractTrackList)
+}
+
+const extractTrackList = obj => {
+  const items = obj.items
+  if (items.length > 0) {
+    const description = items[0].snippet.description
+    ui.trackList.val(description)
+    inputChanged()
+  }
+}
+
+const extractYouTubeID = url => {
+  const regex = new RegExp('[\?&]v=(.*)$')
+  return regex.exec(url)[1] || false
+}
+
 module.exports = {
   processTracks: processTracks,
-  testRegex: testRegex,
-  inputChanged: inputChanged
+  inputChanged: inputChanged,
+  grabYouTubeTracks: grabYouTubeTracks
 }
