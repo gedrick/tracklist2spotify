@@ -21,3 +21,5 @@
 * add to playlist
 * show search results with preview buttons
 * sortable search results
+
+* implement "varying modal content"

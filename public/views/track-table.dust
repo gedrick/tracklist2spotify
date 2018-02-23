@@ -1,33 +1,38 @@
-<div class="table-responsive table">
-  <table class="table spotify-results">
-    <thead>
-      <tr>
-        <th scope="col">Artist</th>
-        <th scope="col">Track Title</th>
-        <th scope="col">Album</th>
-        <th scope="col">Sample</th>
-        <th scope="col">Cover</th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm">
       {#results}
         {#resultFound}
           {#trackData}
-            <tr class="found-track">
-              <td class="column-checkbox"><input type="checkbox" /></td>
-              <td class="column-artist">{artist}</td>
-              <td class="column-tracktitle"><a href="{trackUrl}">{track}</a></td>
-              <td class="column-album">{album}</td>
-              <td class="column-preview">[preview]</td>
-              <td class="column-albumcover"><img src="{albumArt}"/></td>
-            </tr>
+            <div class="input-group mb-2 found-track">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="found-track-selection" data-track-id="{trackId}" type="checkbox" aria-label="Checkbox for adding track to playlist" checked />
+                </div>
+              </div>
+              <p class="form-control track-result">{artist} - {track}</p>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <a href="{trackUrl}" target="_blank"><img class="found-track-album-art" src="{albumArt}" /></a>
+                </div>
+              </div>
+            </div>
           {/trackData}
         {:else}
-          <tr class="unknown-track">
-            <td colspan="6">{trackData.name}</td>
-          </tr>
+          <div class="input-group mb-2 unknown-track">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for adding track to playlist" disabled="disabled" />
+              </div>
+            </div>
+            <p class="form-control track-result">{trackData.name}</p>
+          </div>
         {/resultFound}
       {/results}
-    </tbody>
-  </table>
+    </div>
+    <div class="col-sm">
+      <p>Add to a new playlist:</p>
+      <p>Or create a new playlist:</p>
+    </div>
+  </div>
 </div>

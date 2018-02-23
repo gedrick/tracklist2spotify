@@ -108,6 +108,8 @@ app.get('/searchTracks', (req, res) => {
     })
 })
 
+// TODO - method to return playlists
+
 const server = app.listen(3000, () => {
   console.log(`server operating on port ${server.address().port}`)
 })
