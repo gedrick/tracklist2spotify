@@ -7,12 +7,16 @@ const ui = {
   youtubeUrl: $('#youtube-url'),
   btnGrabTracks: $('#btn-grab-tracks'),
   
+  // Data entry and parsing.
   trackList: $('#tracklist'),
   selector: $('#regex-select'),
   preview: $('#tracklist-preview'),
 
+  // Modals.
   errorModal: $('#errorModal'),
+  searchingModal: $('#searchingModal'),
   spotifyErrorModal: $('#spotifyErrorModal'),
+
   previewContainer: $('.tracklist-preview-container'),
 
   spotifyResults: $('#spotifyResults')
@@ -34,7 +38,7 @@ const testRegex = (event) => {
       // Found a match, add it to output.
       output += `${match[1].trim()} - ${match[2].trim()}\n`
     }
-  });
+  })
 
   ui.preview.val(output)
 }
@@ -67,7 +71,7 @@ const extractTrackList = obj => {
     ui.trackList.val(description)
   } else {
     ui.trackList.val('')
-    ui.errorModal.modal()
+    ui.errorModal.modal('show')
   }
   inputChanged()
 }
@@ -83,8 +87,12 @@ const extractYouTubeID = url => {
  */
 const processTracks = () => {
   const tracks = ui.preview.val()
+
+  // Show the Now Searching modal...
+  ui.searchingModal.modal('show')
+  
   if (!tracks) {
-    ui.spotifyErrorModal.modal();
+    ui.spotifyErrorModal.modal()
   } else {
     $.get(`/searchTracks`, {
       tracklist: tracks
@@ -93,7 +101,9 @@ const processTracks = () => {
 }
 
 displayTrackList = html => {
-  ui.spotifyResults.html(html);
+  // Hide the Now Searching modal and display the results.
+  ui.searchingModal.modal('hide')
+  ui.spotifyResults.html(html)
   ui.step1.hide()
   ui.step2.hide()
 }
