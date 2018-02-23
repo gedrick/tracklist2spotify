@@ -14,7 +14,7 @@ const config = (grunt) => {
     concurrent: require('./grunt/tasks/concurrent')
   })
 
-  grunt.registerTask('default', ['browserify', 'stylus', 'concurrent'])
+  grunt.registerTask('dev', ['browserify', 'stylus', 'concurrent'])
 }
 
 module.exports = config
