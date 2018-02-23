@@ -1,5 +1,5 @@
 <div class="table-responsive table">
-  <table class="table">
+  <table class="table spotify-results">
     <thead>
       <tr>
         <th scope="col">Artist</th>
@@ -11,13 +11,22 @@
     </thead>
     <tbody>
       {#results}
-        <tr>
-          <td>{artist}</td>
-          <td><a href="{trackUrl}">{track}</a></td>
-          <td>{album}</td>
-          <td>[preview]</td>
-          <td><img src="{albumArt}"/></td>
-        </tr>
+        {#resultFound}
+          {#trackData}
+            <tr class="found-track">
+              <td class="column-checkbox"><input type="checkbox" /></td>
+              <td class="column-artist">{artist}</td>
+              <td class="column-tracktitle"><a href="{trackUrl}">{track}</a></td>
+              <td class="column-album">{album}</td>
+              <td class="column-preview">[preview]</td>
+              <td class="column-albumcover"><img src="{albumArt}"/></td>
+            </tr>
+          {/trackData}
+        {:else}
+          <tr class="unknown-track">
+            <td colspan="6">{trackData.name}</td>
+          </tr>
+        {/resultFound}
       {/results}
     </tbody>
   </table>
