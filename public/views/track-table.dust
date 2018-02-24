@@ -31,8 +31,7 @@
       {/results}
     </div>
     <div class="col-sm">
-      <p>Add to a new playlist:</p>
-      <p>Or create a new playlist:</p>
+      {>"playlist-add"/}
     </div>
   </div>
 </div>
