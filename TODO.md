@@ -15,7 +15,7 @@
 * get spotify hookup working
 * spotify search on client end
 * show search results
-
+* search results in modal instead of main page
 
 # TO DO
 
@@ -23,8 +23,8 @@
 * create playlist
 * add to playlist
 * sortable search results
+* implement "varying modal content" to reuse containers for status messages
 
 
-# STRETCH GOALS
 
-* implement "varying modal content"
+

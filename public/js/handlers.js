@@ -20,10 +20,11 @@ const ui = {
   errorModal: $('#errorModal'),
   searchingModal: $('#searchingModal'),
   spotifyErrorModal: $('#spotifyErrorModal'),
+  spotifyResultsModal: $('#spotifyResultsModal'),
 
   previewContainer: $('.tracklist-preview-container'),
 
-  spotifyResults: $('#spotifyResults')
+  spotifyResultsContainer: $('#spotifyResultsContainer')
 }
 
 /**
@@ -111,7 +112,9 @@ const searchTracks = tracks => {
 }
 
 const displayTracks = (data, textStatus, jqXHR) => {
-  ui.spotifyResults.html(data)
+  // Set the content of the search results modal and show it.
+  ui.spotifyResultsContainer.html(data)
+  ui.spotifyResultsModal.modal('show')
 }
 
 const complete = () => {
