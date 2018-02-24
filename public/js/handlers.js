@@ -13,6 +13,9 @@ const ui = {
   selector: $('#regex-select'),
   preview: $('#tracklist-preview'),
 
+  // User playlist list.
+  playlistSelector: $('#playlistSelector'),
+
   // Modals.
   errorModal: $('#errorModal'),
   searchingModal: $('#searchingModal'),
@@ -95,16 +98,25 @@ const processTracks = () => {
   if (!tracks) {
     ui.spotifyErrorModal.modal()
   } else {
-    $.get(`/searchTracks`, {
-      tracklist: tracks
-    }, displayTrackList)
+    searchTracks(tracks)
+      // .then(getPlaylists)
+      .done(displayResults)
   }
 }
 
-const displayTrackList = html => {
-  // Hide the Now Searching modal and display the results.
+const searchTracks = tracks => {
+  return $.get('/searchTracks', {
+    tracklist: tracks
+  })
+}
+
+const getPlaylists = (data, textStatus, jqXHR) => {
+  return $.get('/getPlaylists')
+}
+
+const displayResults = (data, textStatus, jqXHR) => {
   ui.searchingModal.modal('hide')
-  ui.spotifyResults.html(html)
+  ui.spotifyResults.html(data)
   ui.step1.hide()
   ui.step2.hide()
 }
