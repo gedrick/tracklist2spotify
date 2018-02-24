@@ -13,13 +13,18 @@
 * implement bootstrap
 * track parsing regexes
 * get spotify hookup working
+* spotify search on client end
+* show search results
+
 
 # TO DO
 
-* spotify search on client end
+* add preview buttons to search results (desktop only?)
 * create playlist
 * add to playlist
-* show search results with preview buttons
 * sortable search results
+
+
+# STRETCH GOALS
 
 * implement "varying modal content"
