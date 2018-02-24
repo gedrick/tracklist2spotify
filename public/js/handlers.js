@@ -99,8 +99,8 @@ const processTracks = () => {
     ui.spotifyErrorModal.modal()
   } else {
     searchTracks(tracks)
-      // .then(getPlaylists)
-      .done(displayResults)
+      .then(displayTracks)
+      .done(complete)
   }
 }
 
@@ -110,13 +110,12 @@ const searchTracks = tracks => {
   })
 }
 
-const getPlaylists = (data, textStatus, jqXHR) => {
-  return $.get('/getPlaylists')
+const displayTracks = (data, textStatus, jqXHR) => {
+  ui.spotifyResults.html(data)
 }
 
-const displayResults = (data, textStatus, jqXHR) => {
+const complete = () => {
   ui.searchingModal.modal('hide')
-  ui.spotifyResults.html(data)
   ui.step1.hide()
   ui.step2.hide()
 }

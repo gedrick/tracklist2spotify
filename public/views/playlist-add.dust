@@ -4,10 +4,15 @@
     <label class="input-group-text" for="playlistSelector">Your Playlists</label>
   </div>
   <select class="custom-select" id="playlistSelector">
-    <option selected id="playlist-selector">Choose...</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
+    {#playlists}
+      {@eq key="results" value="0"}
+        <option val="0">No playlists found...</option>
+      {:else}
+        {#items}
+          <option value="{id}">{name}</option>
+        {/items}
+      {/eq}
+    {/playlists}
   </select>
 </div>
 

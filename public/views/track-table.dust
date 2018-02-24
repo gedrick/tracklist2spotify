@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm">
-      {#results}
+      {#tracks}
         {#resultFound}
           {#trackData}
             <div class="input-group mb-2 found-track">
@@ -28,7 +28,7 @@
             <p class="form-control track-result">{trackData.name}</p>
           </div>
         {/resultFound}
-      {/results}
+      {/tracks}
     </div>
     <div class="col-sm">
       {>"playlist-add"/}

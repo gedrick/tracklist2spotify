@@ -102,9 +102,31 @@ app.get('/youtube', (req, res) => {
 
 app.get('/searchTracks', (req, res) => {
   const tracklist = req.query.tracklist
-  Spotify.searchTracks(spotifyApi, tracklist)
-    .then(results => {
-      res.render('track-table', { results: results })
+  Promise.all([
+    Spotify.searchTracks(spotifyApi, tracklist),
+    Spotify.getPlaylists()
+  ]).then(results => {
+    return res.render('track-table', {
+      tracks: results[0],
+      playlists: results[1]
+    })
+  })
+})
+
+app.get('/addToPlaylist', (req, res) => {
+  // Spotify.
+})
+
+app.get('/addToNewPlaylist', (req, res) => {
+  const playlistName = req.query.playlistName
+  Spotify.createPlaylist(playlistName)
+    .then(Spotify.addTrackToPlaylist)
+    .then(result => {
+      res.send(JSON.stringify({
+        status: result.status,
+        count: result.count,
+        url: result.url
+      }))
     })
 })
 
