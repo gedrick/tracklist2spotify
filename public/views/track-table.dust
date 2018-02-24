@@ -1,37 +1,36 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm">
-      {#tracks}
-        {#resultFound}
-          {#trackData}
-            <div class="input-group mb-2 found-track">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <input class="found-track-selection" data-track-id="{trackId}" type="checkbox" aria-label="Checkbox for adding track to playlist" checked />
-                </div>
-              </div>
-              <p class="form-control track-result">{artist} - {track}</p>
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <a href="{trackUrl}" target="_blank"><img class="found-track-album-art" src="{albumArt}" /></a>
-                </div>
-              </div>
+  <div class="row mb-3 track-results-container">
+    {#tracks}
+      {#resultFound}
+      {#trackData}
+        <div class="input-group mb-2 found-track">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input class="found-track-selection" data-track-id="{trackId}" type="checkbox" aria-label="Checkbox for adding track to playlist" checked />
             </div>
-          {/trackData}
-        {:else}
-          <div class="input-group mb-2 unknown-track">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for adding track to playlist" disabled="disabled" />
-              </div>
-            </div>
-            <p class="form-control track-result">{trackData.name}</p>
           </div>
-        {/resultFound}
-      {/tracks}
-    </div>
-    <div class="col-sm">
-      {>"playlist-add"/}
-    </div>
+          <p class="form-control track-result">{artist} - {track}</p>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <a href="{trackUrl}" target="_blank"><img class="found-track-album-art" src="{albumArt}" /></a>
+            </div>
+          </div>
+        </div>
+        {/trackData}
+      {:else}
+        <div class="input-group mb-2 unknown-track">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input type="checkbox" aria-label="Checkbox for adding track to playlist" disabled="disabled" />
+            </div>
+          </div>
+          <p class="form-control track-result">{trackData.name}</p>
+        </div>
+      {/resultFound}
+    {/tracks}
   </div>
+  <div class="row">
+    {>"playlist-add"/}
+  </div>
+</div>
 </div>

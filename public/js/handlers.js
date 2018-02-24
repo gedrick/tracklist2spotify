@@ -119,8 +119,6 @@ const displayTracks = (data, textStatus, jqXHR) => {
 
 const complete = () => {
   ui.searchingModal.modal('hide')
-  ui.step1.hide()
-  ui.step2.hide()
 }
 
 module.exports = {
