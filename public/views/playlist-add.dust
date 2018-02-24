@@ -1,25 +1,29 @@
-<p>Add selected tracks to an existing playlist:</p>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <label class="input-group-text" for="playlistSelector">Your Playlists</label>
+    <div class="input-group-text">
+      <input type="radio" name="playlistMethod" id="optAddToPlaylist" value="existingPlaylist" checked />
+    </div>
+    <div class="input-group-text">
+      <span>Add to Playlist</span>
+    </div>
   </div>
-  <select class="custom-select" id="playlistSelector">
+  <select class="custom-select form-control" id="playlistSelector">
     {#playlists}
-      {@eq key="results" value="0"}
-        <option val="0">No playlists found...</option>
-      {:else}
-        {#items}
-          <option value="{id}">{name}</option>
-        {/items}
-      {/eq}
+      {#items}
+        <option value="{id}">{name}</option>
+      {/items}
     {/playlists}
   </select>
 </div>
 
-<p>Or create a new playlist:</p>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Playlist Name</span>
+    <div class="input-group-text">
+      <input type="radio" name="playlistMethod" id="optCreateNewPlaylist" value="newPlaylist" />
+    </div>
+    <div class="input-group-text">
+      <span>Create Playlist</span>
+    </div>
   </div>
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" id="newPlaylistName">
 </div>
