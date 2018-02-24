@@ -101,7 +101,7 @@ const processTracks = () => {
   }
 }
 
-displayTrackList = html => {
+const displayTrackList = html => {
   // Hide the Now Searching modal and display the results.
   ui.searchingModal.modal('hide')
   ui.spotifyResults.html(html)
