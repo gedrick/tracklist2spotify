@@ -87,7 +87,7 @@ const extractYouTubeID = url => {
 }
 
 /**
- * Queries Spotify for the list of given tracks.
+ * Communicates with Spotify for the list of given tracks.
  * @param {*} event 
  */
 const processTracks = () => {
@@ -111,8 +111,13 @@ const searchTracks = tracks => {
   })
 }
 
+/**
+ * Set the content of the search results modal and show it.
+ * @param {*} data 
+ * @param {*} textStatus 
+ * @param {*} jqXHR 
+ */
 const displayTracks = (data, textStatus, jqXHR) => {
-  // Set the content of the search results modal and show it.
   ui.spotifyResultsContainer.html(data)
   ui.spotifyResultsModal.modal('show')
 }
@@ -121,8 +126,13 @@ const complete = () => {
   ui.searchingModal.modal('hide')
 }
 
+const saveTracks = () => {
+
+}
+
 module.exports = {
   inputChanged: inputChanged,
   grabYouTubeTracks: grabYouTubeTracks,
-  processTracks: processTracks
+  processTracks: processTracks,
+  saveTracks: saveTracks
 }

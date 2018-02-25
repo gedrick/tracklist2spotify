@@ -7,6 +7,7 @@ const setupBindings = () => {
   $('#tracklist').on('input propertychange', handlers.inputChanged)
   $('#btn-grab-tracks').on('click', handlers.grabYouTubeTracks)
   $('#submit-tracks').on('click', handlers.processTracks)
+  $('#btn-save-tracks').on('click', handlers.saveTracks)
 }
 
 module.exports = {

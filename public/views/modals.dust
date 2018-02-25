@@ -62,7 +62,7 @@
         <div id="spotifyResultsContainer"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save Tracks to Playlist</button>
+        <button type="button" class="btn btn-primary" id="btn-save-tracks">Save Tracks to Playlist</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
