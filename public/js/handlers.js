@@ -130,34 +130,32 @@ const complete = () => {
 }
 
 const saveTracks = () => {
-  const playlistMethod = $('input[name=playlistMethod]:checked').value
-  const playlistId = $('#playlistSelector').value
-  const playlistName = $('#newPlaylistName').value
+  const playlistMethod = $('input[name=playlistMethod]:checked').val()
+  const playlistId = $('#playlistSelector').val()
+  const playlistName = $('#newPlaylistName').val()
   const selectedTracks = $('.found-track-selection')
+  let trackArray = []
 
-  if (playlistMethod === 'existingPlaylist') {
-    addTracksToPlaylist(selectedTracks)
-      .done(doneAddingTracks)
-      .catch(handleError)
-  } else {
-    createPlaylist(playlistName)
-      .then(addTracksToPlaylist(selectedTracks))
-      .done(doneAddingTracks)
-      .catch(handleError)
+  _.forEach(selectedTracks, track => {
+    trackArray.push(track.dataset.trackId)
+  })
+
+  const requestOpts = {
+    method: playlistMethod,
+    playlistId: playlistId,
+    playlistName: playlistName,
+    trackArray: trackArray
   }
+
+  addTracksToPlaylist(requestOpts)
+    .done(doneAddingTracks)
+    .catch(handleError)
   
   return true
 }
 
-/**
- * 
- * @param {*} name 
- * @returns {String} the ID of the playlist.
- */
-const createPlaylist = playlistName => {
-  return $.get('/createPlaylist', {
-    playlistName: playlistName
-  })
+const addTracksToPlaylist = requestOps => {
+  return $.get('/addTracksToPlaylist', { options: requestOps })
 }
 
 const doneAddingTracks = res => {
