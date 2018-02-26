@@ -6,7 +6,7 @@
         <div class="input-group mb-2 found-track">
           <div class="input-group-prepend">
             <div class="input-group-text">
-              <input class="found-track-selection" data-track-id="{trackId}" type="checkbox" aria-label="Checkbox for adding track to playlist" checked />
+              <input class="found-track-selection" data-track-id="spotify:track:{trackId}" type="checkbox" aria-label="Checkbox for adding track to playlist" checked />
             </div>
           </div>
           <p class="form-control track-result">{artist} - {track}</p>
