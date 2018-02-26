@@ -7,6 +7,7 @@ const dust = require('dustjs-express')
 const SpotifyWebApi = require('spotify-web-api-node')
 const YouTube = require('youtube-node')
 const Spotify = require('./lib/spotify')
+const Promise = require('bluebird')
 
 // Set up Spotify api.
 const state = 'some-state'
@@ -113,29 +114,29 @@ app.get('/searchTracks', (req, res) => {
   })
 })
 
-app.get('/addToPlaylist', (req, res) => {
-  // Spotify.
+app.get('/addTracksToPlaylist', (req, res) => {
+  const { method, playlistId, playlistName, trackArray } = req.query.options
+  if (method === 'existingPlaylist') {
+    spotifyApi.getMe()
+      .then(data => {
+        return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray)
+      })
+      .then(results => {
+        res.send(JSON.stringify({ succeed: true }))
+      })
+      .catch(err => {
+        res.send(JSON.stringify({ succeed: false, error: err }))
+      })
+  } else {
+    // Work in progress
+    // Spotify.createPlaylist(playlistName)
+    //   .then(addTracksToPlaylist(trackArray))
+    //   .then(results => {
+    //     res.send(results)
+    //   })
+  }
 })
-
-app.get('/addToNewPlaylist', (req, res) => {
-  const playlistName = req.query.playlistName
-  Spotify.createPlaylist(playlistName)
-    .then(Spotify.addTrackToPlaylist)
-    .then(result => {
-      res.send(JSON.stringify({
-        status: result.status,
-        count: result.count,
-        url: result.url
-      }))
-    })
-})
-
-// TODO - method to return playlists
 
 const server = app.listen(3000, () => {
   console.log(`server operating on port ${server.address().port}`)
 })
-
-// app.post('/createPlaylist/:trackList', (req, res) => {
-//   res.send('failed')
-// })

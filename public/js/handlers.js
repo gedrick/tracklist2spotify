@@ -137,7 +137,9 @@ const saveTracks = () => {
   let trackArray = []
 
   _.forEach(selectedTracks, track => {
-    trackArray.push(track.dataset.trackId)
+    if (track.checked) {
+      trackArray.push(track.dataset.trackId)
+    }
   })
 
   const requestOpts = {
