@@ -13,8 +13,11 @@ const ui = {
   selector: $('#regex-select'),
   preview: $('#tracklist-preview'),
 
-  // User playlist list.
-  playlistSelector: $('#playlistSelector'),
+  // User playlist list and options
+  // Not used as they must not be cached.
+  // playlistSelector: $('#playlistSelector'),
+  // selectedTracks: $('.found-track-selection'),
+  // playlistMethod: $('input[name=playlistMethod]:checked').val(),
 
   // Modals.
   errorModal: $('#errorModal'),
@@ -127,7 +130,42 @@ const complete = () => {
 }
 
 const saveTracks = () => {
+  const playlistMethod = $('input[name=playlistMethod]:checked').value
+  const playlistId = $('#playlistSelector').value
+  const playlistName = $('#newPlaylistName').value
+  const selectedTracks = $('.found-track-selection')
 
+  if (playlistMethod === 'existingPlaylist') {
+    addTracksToPlaylist(selectedTracks)
+      .done(doneAddingTracks)
+      .catch(handleError)
+  } else {
+    createPlaylist(playlistName)
+      .then(addTracksToPlaylist(selectedTracks))
+      .done(doneAddingTracks)
+      .catch(handleError)
+  }
+  
+  return true
+}
+
+/**
+ * 
+ * @param {*} name 
+ * @returns {String} the ID of the playlist.
+ */
+const createPlaylist = playlistName => {
+  return $.get('/createPlaylist', {
+    playlistName: playlistName
+  })
+}
+
+const doneAddingTracks = res => {
+  console.log('Done adding tracks: ', res)
+}
+
+const handleError = err => {
+  console.error('An error was hit: ', err)
 }
 
 module.exports = {
