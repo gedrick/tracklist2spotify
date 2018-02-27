@@ -16,14 +16,17 @@
 * spotify search on client end
 * show search results
 * search results in modal instead of main page
+* add to playlist
+* changing selected regex triggers testRegex
 
 # TO DO
 
 * add preview buttons to search results (desktop only?)
-* create playlist
-* add to playlist
+* create playlist and add tracks
 * sortable search results
 * implement "varying modal content" to reuse containers for status messages
+* more regexes
+* autodetect best regex
 
 
 

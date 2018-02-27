@@ -1,6 +1,6 @@
 <select class="custom-select" id="regex-select">
-  <option>Choose pattern...</option>
-  <option value="artist-title" data-regex="^(.*) - (.*)$" selected>(Artist) - (Title)</option>
-  <option value="time-artist-title" data-regex="^\d+\:\d+ (.*) - (.*)$">01:23 (Artist) - (Title)</option>
+  <option>Choose track name format...</option>
+  <option value="artist-title" data-regex="^(.*) - (.*)$" selected>Artist - Title</option>
+  <option value="time-artist-title" data-regex="^\d+\:\d+\:?\d* (.*) - (.*)$">01:23 Artist - Title</option>
   <option value="3">Three</option>
 </select>

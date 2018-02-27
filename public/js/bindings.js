@@ -3,11 +3,20 @@ const $ = require('jquery')
 const handlers = require('./handlers')
 
 const setupBindings = () => {
-  $('#submit').on('click', handlers.processTracks)
+  // Trigger the regex processing.
   $('#tracklist').on('input propertychange', handlers.inputChanged)
-  $('#btn-grab-tracks').on('click', handlers.grabYouTubeTracks)
+  $('#regex-select').on('change', handlers.inputChanged)
+  $('#btn-preview').on('click', handlers.inputChanged)
+
+  // Start querying Spotify API.
   $('#submit-tracks').on('click', handlers.processTracks)
+
+  // Fetch hit Youtube API.
+  $('#btn-grab-tracks').on('click', handlers.grabYouTubeTracks)
+
+  // Start saving track data to playlist.
   $('#btn-save-tracks').on('click', handlers.saveTracks)
+  
   // Work in progress
   // $('#alertModal').on('show.bs.modal', event => {
   //   const fields = event.relatedTarget
@@ -15,10 +24,6 @@ const setupBindings = () => {
   //   modal.find('#alert-message').text(fields.message)
   //   modal.find('#show-spinner').show(fields.spinner || true)
   // })
-}
-
-const showAlertModal = event => {
-  
 }
 
 module.exports = {
