@@ -122,10 +122,17 @@ app.get('/addTracksToPlaylist', (req, res) => {
         return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray)
       })
       .then(results => {
-        res.send(JSON.stringify({ succeed: true }))
+        res.send(JSON.stringify({
+          succeed: true,
+          method: method
+        }))
       })
       .catch(err => {
-        res.send(JSON.stringify({ succeed: false, error: err }))
+        res.send(JSON.stringify({
+          succeed: false,
+          method: method,
+          error: err
+        }))
       })
   } else {
     // Work in progress

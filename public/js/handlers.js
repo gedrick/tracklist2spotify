@@ -24,6 +24,7 @@ const ui = {
   searchingModal: $('#searchingModal'),
   spotifyErrorModal: $('#spotifyErrorModal'),
   spotifyResultsModal: $('#spotifyResultsModal'),
+  successModal: $('#successModal'),
 
   previewContainer: $('.tracklist-preview-container'),
 
@@ -122,7 +123,9 @@ const searchTracks = tracks => {
  */
 const displayTracks = (data, textStatus, jqXHR) => {
   ui.spotifyResultsContainer.html(data)
-  ui.spotifyResultsModal.modal('show')
+  ui.spotifyResultsModal.modal('show', {
+    backdrop: 'static'  // clicking on the backdrop doesn't close modal.
+  })
 }
 
 const complete = () => {
@@ -162,6 +165,13 @@ const addTracksToPlaylist = requestOps => {
 
 const doneAddingTracks = res => {
   console.log('Done adding tracks: ', res)
+  const response = JSON.parse(res)
+
+  if (response.succeed) {
+    ui.successModal.modal('show')
+  } else {
+
+  }
 }
 
 const handleError = err => {
