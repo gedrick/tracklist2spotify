@@ -4,7 +4,8 @@
   "description": "turns a track listing into a Spotify playlist",
   "main": "index.js",
   "scripts": {
-    "dev": "grunt dev"
+    "dev": "grunt dev",
+    "prod": "grunt prod"
   },
   "keywords": [
     "spotify",
