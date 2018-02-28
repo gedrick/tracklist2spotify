@@ -121,9 +121,7 @@ app.get('/addTracksToPlaylist', (req, res) => {
 
   if (method === 'existingPlaylist') {
     spotifyApi.getMe()
-      .then(data => {
-        return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray)
-      })
+      .then(data => { return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray) })
       .then(results => {
         respObj.succeed = true
       })
@@ -133,11 +131,8 @@ app.get('/addTracksToPlaylist', (req, res) => {
       })
   } else {
     spotifyApi.getMe()
-      .then(data => {
-        return spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false })
-      })
-      .then(data => {
-        return spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray)
+      .then(data => { return spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false }) })
+      .then(data => { return spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray)
       })
       .then(results => {
         respObj.succeed = true
