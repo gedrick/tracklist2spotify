@@ -15,6 +15,7 @@ const config = (grunt) => {
   })
 
   grunt.registerTask('dev', ['browserify', 'stylus', 'concurrent'])
+  grunt.registerTask('prod', ['browserify', 'stylus'])
 }
 
 module.exports = config
