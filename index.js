@@ -123,27 +123,22 @@ app.get('/addTracksToPlaylist', (req, res) => {
     spotifyApi.getMe()
       .then(data => { return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray) })
       .then(results => {
-        respObj.succeed = true
+        res.send(JSON.stringify({ succeed: true, method: method }))
       })
       .catch(err => {
-        respObj.succeed = false
-        respObj.error = err
+        res.send(JSON.stringify({ succeed: false, method: method, error: err }))
       })
   } else {
     spotifyApi.getMe()
       .then(data => { return spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false }) })
-      .then(data => { return spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray)
-      })
+      .then(data => { return spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray) })
       .then(results => {
-        respObj.succeed = true
+        res.send(JSON.stringify({ succeed: true, method: method }))
       })
       .catch(err => {
-        respObj.succeed = false
-        respObj.error = err
+        res.send(JSON.stringify({ succeed: false, method: method, error: err }))
       })
   }
-
-  res.send(JSON.stringify(respObj))
 })
 
 const server = app.listen(3000, () => {
