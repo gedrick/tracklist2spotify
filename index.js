@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
         })
       })
       .catch(err => {
-        // They're no longer authorized. Let's kick them back to the homepage 
+        // They're no longer authorized. Let's kick them back to the homepage
         // and clear the authCode cookie so they can get a new one.
         console.log(`Error while querying spotify API: ${err.message}`)
         res.clearCookie('authCode')
@@ -116,32 +116,39 @@ app.get('/searchTracks', (req, res) => {
 
 app.get('/addTracksToPlaylist', (req, res) => {
   const { method, playlistId, playlistName, trackArray } = req.query.options
+  let username = ''
+  let respObj = { method: method }
+
   if (method === 'existingPlaylist') {
     spotifyApi.getMe()
       .then(data => {
         return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray)
       })
       .then(results => {
-        res.send(JSON.stringify({
-          succeed: true,
-          method: method
-        }))
+        respObj.succeed = true
       })
       .catch(err => {
-        res.send(JSON.stringify({
-          succeed: false,
-          method: method,
-          error: err
-        }))
+        respObj.succeed = false
+        respObj.error = err
       })
   } else {
-    // Work in progress
-    // Spotify.createPlaylist(playlistName)
-    //   .then(addTracksToPlaylist(trackArray))
-    //   .then(results => {
-    //     res.send(results)
-    //   })
+    spotifyApi.getMe()
+      .then(data => {
+        return spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false })
+      })
+      .then(data => {
+        return spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray)
+      })
+      .then(results => {
+        respObj.succeed = true
+      })
+      .catch(err => {
+        respObj.succeed = false
+        respObj.error = err
+      })
   }
+
+  res.send(JSON.stringify(respObj))
 })
 
 const server = app.listen(3000, () => {
