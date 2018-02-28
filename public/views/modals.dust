@@ -75,3 +75,16 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="addToPlaylistErrorModal" tabindex="-1" role="dialog" aria-labelledby="addToPlaylistErrorModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        Sorry - there was an error adding your tracks to the playlist. Please refresh the page, try reconnecting to Spotify, and try again.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

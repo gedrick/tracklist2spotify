@@ -24,6 +24,7 @@ const ui = {
   searchingModal: $('#searchingModal'),
   spotifyErrorModal: $('#spotifyErrorModal'),
   spotifyResultsModal: $('#spotifyResultsModal'),
+  addToPlaylistErrorModal: $('#addToPlaylistErrorModal'),
   successModal: $('#successModal'),
 
   previewContainer: $('.tracklist-preview-container'),
@@ -170,7 +171,7 @@ const doneAddingTracks = res => {
   if (response.succeed) {
     ui.successModal.modal('show')
   } else {
-
+    ui.addToPlaylistErrorModal.modal('show')
   }
 }
 
