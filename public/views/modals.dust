@@ -36,7 +36,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        Querying Spotify and finding your tracks...
+        Querying Spotify and finding your tracks... this may take a bit depending on how big your tracklist is!
         {>"spinner"/}
       </div>
       <div class="modal-footer">
