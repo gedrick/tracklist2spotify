@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "grunt dev",
-    "start": "grunt prod"
+    "start": "node index.js"
   },
   "keywords": [
     "spotify",
