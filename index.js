@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
   const cookies = cookie.parse(req.headers.cookie || '')
   let authorized = false
   let authUrl = ''
-  let name = ''
 
   if (cookies.authCode) {
     // The user has logged in already, set the authcode for all requests.
