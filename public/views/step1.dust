@@ -20,6 +20,8 @@
   </textarea>
 </div>
 
+<label>Next, pick the pattern of the track list items found in the description:</label>
+
 <div class="tracklist-preview-container">
   <div class="input-group mb-3">
     {>"regex"/}
