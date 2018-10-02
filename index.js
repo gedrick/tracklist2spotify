@@ -140,6 +140,7 @@ app.get('/addTracksToPlaylist', (req, res) => {
   }
 })
 
-const server = app.listen(3000, () => {
+const listenPort = process.env.NODE_ENV === 'production' ? 80 : 3000
+const server = app.listen(listenPort, () => {
   console.log(`server operating on port ${server.address().port}`)
 })
