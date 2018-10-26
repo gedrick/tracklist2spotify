@@ -24,8 +24,7 @@ app.set('views', path.join(__dirname, 'public/views'))
 app.set('view engine', 'dust')
 app.engine('dust', dust.engine())
 
-app.use(express.static(__dirname + '/public'))
-app.use(express.static(__dirname + '/build'))
+app.use(express.static('build'))
 
 app.get('/', (req, res) => {
   const cookies = cookie.parse(req.headers.cookie || '')
