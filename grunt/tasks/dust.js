@@ -7,6 +7,7 @@ const dust = {
 
     options: {
       // see below for options. this is optional.
+      module: 'dustjs-express'
     }
   }
 }

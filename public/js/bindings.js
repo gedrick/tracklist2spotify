@@ -16,14 +16,6 @@ const setupBindings = () => {
 
   // Start saving track data to playlist.
   $('#btn-save-tracks').on('click', handlers.saveTracks)
-  
-  // Work in progress
-  // $('#alertModal').on('show.bs.modal', event => {
-  //   const fields = event.relatedTarget
-  //   let modal = $(this)
-  //   modal.find('#alert-message').text(fields.message)
-  //   modal.find('#show-spinner').show(fields.spinner || true)
-  // })
 }
 
 module.exports = {

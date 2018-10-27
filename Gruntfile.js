@@ -5,7 +5,7 @@ const config = (grunt) => {
   grunt.initConfig({
     browserify: require('./grunt/tasks/browserify'),
     stylus: require('./grunt/tasks/stylus'),
-    // dust: require('./grunt/tasks/dust'),
+    dust: require('./grunt/tasks/dust'),
 
     // Set up to be used by grunt-concurrent.
     nodemon: require('./grunt/tasks/nodemon'),

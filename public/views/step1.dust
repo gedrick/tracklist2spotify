@@ -1,29 +1,31 @@
-<label>Paste a YouTube URL to have the track list automatically pulled out of the description:</label>
+<label><b>Step 1: </b>Paste a YouTube URL to have the track list automatically pulled out of the description:</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text">URL:</span>
   </div>
   <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/>
   <div class="input-group-append">
-    <button id="btn-grab-tracks" class="btn btn-outline-secondary" type="button">Grab Tracks</button>
+    <button id="btn-grab-tracks" class="btn btn-outline-secondary" type="button">Get Video Description</button>
   </div>
 </div>
 
-<label>or, paste the description/tracklist down below:</label>
+<label>or, paste the tracklist down below:</label>
 
 <div class="form-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text">Tracklist</span>
   </div>
   <textarea class="form-control" id="tracklist" rows="5" aria-label="With textarea">
-
   </textarea>
 </div>
 
-<label>Next, pick the pattern of the track list items found in the description:</label>
+<label><b>Step 2: </b>Select or enter the pattern of the track list items:</label>
 
 <div class="tracklist-preview-container">
   <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Pattern:</span>
+    </div>
     {>"regex"/}
     <div class="input-group-prepend">
       <button id="btn-preview" class="btn btn-outline-secondary" type="button">Extract Tracks</button>
@@ -32,11 +34,9 @@
 
   <div class="form-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text">Preview Tracks</span>
+      <span class="input-group-text">Tracks Found</span>
     </div>
-    <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly>
-      {>"test/test-tracklist"/}
-    </textarea>
+    <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly></textarea>
   </div>  
 </div>
 

@@ -22,6 +22,15 @@ const watch = {
         reload: true
       }
     }
+    // templates: {
+    //   files: [
+    //     'public/views/**/*.dust'
+    //   ],
+    //   tasks: ['dusthtml'],
+    //   options: {
+    //     reload: true
+    //   }
+    // }
 }
 
 module.exports = watch

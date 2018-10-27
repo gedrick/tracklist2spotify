@@ -1,6 +1,8 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <h1>tracklist2spotify</h1>
+    <h4><i>Pull tracklists from YouTube mixes, and add them to your Spotify playlists</i></h4>
+    <br>
     <div class="step1 hero-unit">
       {>"step1"/}
     </div>

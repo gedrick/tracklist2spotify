@@ -33,6 +33,7 @@
     "grunt-contrib-uglify-es": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-dust-html": "^0.3.0",
+    "grunt-nodemon": "^0.4.2",
     "load-grunt-tasks": "^3.5.2"
   }
 }
