@@ -1,42 +1,15 @@
-<label><b>Step 1: </b>Paste a YouTube URL to have the track list automatically pulled out of the description:</label>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text">URL:</span>
-  </div>
-  <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/>
-  <div class="input-group-append">
-    <button id="btn-grab-tracks" class="btn btn-outline-secondary" type="button">Get Video Description</button>
-  </div>
+<div>
+  <label><b>Step 1: </b>
+  {#authorized}
+    <p>You are logged in as 
+      {#userData.display_name}
+        {userData.display_name}
+      {:else}
+        {userData.id}
+      {/userData.display_name}
+    !</p>
+    <div class="spotify-user-image"><img src="{userData.images[0].url}"/></div>
+  {:else}
+    <a href="{authUrl}" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Connect to Spotify</a>
+  {/authorized}
 </div>
-
-<label>or, paste the tracklist down below:</label>
-
-<div class="form-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text">Tracklist</span>
-  </div>
-  <textarea class="form-control" id="tracklist" rows="5" aria-label="With textarea">
-  </textarea>
-</div>
-
-<label><b>Step 2: </b>Select or enter the pattern of the track list items:</label>
-
-<div class="tracklist-preview-container">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Pattern:</span>
-    </div>
-    {>"regex"/}
-    <div class="input-group-prepend">
-      <button id="btn-preview" class="btn btn-outline-secondary" type="button">Extract Tracks</button>
-    </div>
-  </div>
-
-  <div class="form-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Tracks Found</span>
-    </div>
-    <textarea class="form-control" id="tracklist-preview" rows="5" aria-label="With textarea" readonly></textarea>
-  </div>  
-</div>
-

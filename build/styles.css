@@ -5,6 +5,9 @@
 .container-fluid .row-fluid {
   width: 100%;
 }
+.step1 {
+  margin: auto;
+}
 
 body {
   background-color: #fff;
@@ -105,9 +108,6 @@ p {
 #tracklist,
 #youtube {
   padding: 10px;
-}
-.tracklist-preview-container {
-  display: block;
 }
 
 .spotify-user-image img {

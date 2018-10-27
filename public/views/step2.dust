@@ -1,15 +1,22 @@
-{#authorized}
-<button id="submit-tracks" class="btn btn-primary btn-large">Search Spotify</button>
+<label><b>Step 2: </b>Paste a YouTube URL to have the track list automatically pulled out of the description:</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">URL:</span>
+  </div>
+  <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/>
+  <div class="input-group-append">
+    <button id="btn-grab-tracks" class="btn btn-outline-secondary" type="button">Get Video Description</button>
+  </div>
+</div>
 
-<p>Welcome back, 
-    {#userData.display_name}
-      {userData.display_name}
-    {:else}
-      {userData.id}
-    {/userData.display_name}
-  !</p>
-  <div class="spotify-user-image"><img src="{userData.images[0].url}"/></div>
-{:else}
-  <a href="{authUrl}" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Connect to Spotify</a>
-{/authorized}
+<label>or, paste the tracklist down below:</label>
+
+<div class="form-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Tracklist</span>
+  </div>
+  <textarea class="form-control" id="tracklist" rows="5" aria-label="With textarea">
+  </textarea>
+</div>
+
 <div class="spotify-tracks" id="spotify-tracks"></div>
