@@ -11,6 +11,7 @@ const Promise = require('bluebird')
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const request = require('request');
+const crypto = require('crypto');
 
 var generateRandomString = function(length) {
   var text = '';
@@ -22,6 +23,24 @@ var generateRandomString = function(length) {
   return text;
 };
 var stateKey = 'spotify_auth_state';
+
+// Encrypt / Decrypt
+const algorithm = 'aes-256-ctr';
+const password = 'LokiBoy2112!@#&^%$';
+
+function encrypt(text){
+  var cipher = crypto.createCipher(algorithm, password)
+  var crypted = cipher.update(text, 'utf8', 'hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
+ 
+function decrypt(text){
+  var decipher = crypto.createDecipher(algorithm, password)
+  var dec = decipher.update(text, 'hex', 'utf8')
+  dec += decipher.final('utf8');
+  return dec;
+}
 
 // Set up Spotify api.
 const configSettings = require('./config/settings.js')
@@ -36,16 +55,19 @@ app.set('views', path.join(__dirname, 'public/views'))
 app.set('view engine', 'dust')
 app.engine('dust', dust.engine())
 
-app.use(express.static('build'))
+app.use(express.static('build'));
 app.use(cookieParser());
+app.use((req, res, next) => {
+  if (req.cookies.access_token) {
+    console.log('access token was:' + spotifyApi.getAccessToken());
+    console.log('access token IS:' + req.cookies.access_token);
+    spotifyApi.setAccessToken(decrypt(req.cookies.access_token));  
+  }
+  next();
+});
 
 app.get('/', (req, res) => {
-  console.log('cookies!', req.cookies);
-  let access_token;
-
   if (req.cookies.access_token) {
-    access_token = req.cookies.access_token;
-    spotifyApi.setAccessToken(access_token);
     spotifyApi.getMe()
       .then(userData => {
         res.render('index', {
@@ -112,7 +134,7 @@ app.get('/callback', (req, res) => {
         const access_token = body.access_token;
         // const refresh_token = body.refresh_token;
 
-        res.cookie('access_token', access_token, { maxAge: 900000, httpOnly: true });
+        res.cookie('access_token', encrypt(access_token), { maxAge: 900000, httpOnly: true });
         // res.cookie('refresh_token', refresh_token, { maxAge: 900000, httpOnly: true });
         res.redirect('/');
       } else {
@@ -141,7 +163,6 @@ app.get('/youtube', (req, res) => {
 app.get('/searchTracks', (req, res) => {
   const tracklist = req.query.tracklist
   console.log('/searchTracks hit, cookies:', req.cookies);
-  // spotifyApi.setAccessToken(req.)
   Promise.all([
     Spotify.searchTracks(spotifyApi, tracklist),
     Spotify.getPlaylists()
