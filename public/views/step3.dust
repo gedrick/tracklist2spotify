@@ -16,6 +16,6 @@
   </div>  
 </div>
 
-{#authorized}
+{#userData}
 <button id="submit-tracks" class="btn btn-primary btn-large">Start Spotify Search</button>
-{/authorized}
+{/userData}

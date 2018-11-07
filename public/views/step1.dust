@@ -1,6 +1,6 @@
 <div>
   <label><b>Step 1: </b>
-  {#authorized}
+  {#userData}
     <p>You are logged in as 
       {#userData.display_name}
         {userData.display_name}
@@ -9,7 +9,8 @@
       {/userData.display_name}
     !</p>
     <div class="spotify-user-image"><img src="{userData.images[0].url}"/></div>
+    <p><a href="/logout">Logout</a></p>
   {:else}
-    <a href="{authUrl}" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Connect to Spotify</a>
-  {/authorized}
+    <a href="/login" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Connect to Spotify</a>
+  {/userData}
 </div>
