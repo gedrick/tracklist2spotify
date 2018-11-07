@@ -64,21 +64,34 @@ const inputChanged = (event) => {
 
 const grabYouTubeTracks = () => {
   const youtubeUrl = ui.youtubeUrl.val().trim()
-  const videoID = extractYouTubeID(youtubeUrl)
-  if (youtubeUrl === '' || !videoID) {
+  const type = youtubeUrl.indexOf('playlist') > -1 ? 'playlist' : 'video';
+
+  let videoID
+  if (type === 'video') {
+    videoID = extractYouTubeID(youtubeUrl) || youtubeUrl
+  } else {
+    videoID = youtubeUrl
+  }
+
+  if (!videoID) {
     return
   }
 
   $.get('/youtube', {
-    id: videoID
+    id: videoID,
+    type: type
   }, extractTrackList)
 }
 
 const extractTrackList = obj => {
-  const items = obj.items
-  if (items.length > 0) {
+  if (obj.items && obj.items.length > 0) {
+    // Video
+    const items = obj.items
     const description = items[0].snippet.description
     ui.trackList.val(description)
+  } else if (obj.data && obj.data.playlist) {
+    // Playlist
+    ui.trackList.val(obj.data.playlist.join('\n'))
   } else {
     ui.trackList.val('')
     ui.errorModal.modal('show')
@@ -87,7 +100,7 @@ const extractTrackList = obj => {
 }
 
 const extractYouTubeID = url => {
-  const regex = new RegExp('[\?&]v=(.*)$')
+  let regex = new RegExp('[\?&]v=(.*)$')
   return regex.exec(url)[1] || false
 }
 

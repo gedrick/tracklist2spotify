@@ -1,15 +1,16 @@
-<label><b>Step 2: </b>Paste a YouTube URL to have the track list automatically pulled out of the description:</label>
+<label><b>Step 2: </b>Paste a YouTube video URL <b>OR</b> playlist URL. If you paste a video URL, the video description will be pulled out. If you paste a playlist URL, the names of the videos will be pulled in.</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text">URL:</span>
   </div>
-  <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/>
+  <!-- <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/watch?v=xYi6rvlpsDU" aria-label="Username"/> -->
+  <input type="text" class="form-control" id="youtube-url" placeholder="http://www.youtube.com/" value="https://www.youtube.com/playlist?list=PLYkB2GLfxxJevVAYxg-fp2EB_13zwhm1X" aria-label="Username"/>
   <div class="input-group-append">
     <button id="btn-grab-tracks" class="btn btn-outline-secondary" type="button">Get Video Description</button>
   </div>
 </div>
 
-<label>or, paste the tracklist down below:</label>
+<label>optionally, you can paste the tracklist down below:</label>
 
 <div class="form-group mb-3">
   <div class="input-group-prepend">

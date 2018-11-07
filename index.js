@@ -6,6 +6,7 @@ const app = express()
 const dust = require('dustjs-express')
 const SpotifyWebApi = require('spotify-web-api-node')
 const YouTube = require('youtube-node')
+const ytlist = require('youtube-playlist')
 const Spotify = require('./lib/spotify')
 const Promise = require('bluebird')
 const querystring = require('querystring');
@@ -150,14 +151,22 @@ app.get('/callback', (req, res) => {
 // API calls
 app.get('/youtube', (req, res) => {
   const youtube = new YouTube()
+  const type = req.query.type;
+
   youtube.setKey(configSettings.youtubeKey)
-  youtube.getById(req.query.id, (error, result) => {
-    if (error) {
-      res.send(error)
-    } else {
-      res.send(result)
-    }
-  })
+  if (type === 'video') {
+    youtube.getById(req.query.id, (error, result) => {
+      if (error) {
+        res.send(error)
+      } else {
+        res.send(result)
+      }
+    })
+  } else {
+    ytlist(req.query.id, 'name').then(result => {
+      res.send(result);
+    });
+  }
 })
 
 app.get('/searchTracks', (req, res) => {
