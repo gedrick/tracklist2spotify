@@ -2,6 +2,7 @@ node_modules
 npm-debug.log
 .DS_Store
 Archive.zip
+config/settings.js
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
