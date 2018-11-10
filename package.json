@@ -11,7 +11,7 @@
     "spotify",
     "playlist"
   ],
-  "author": "Geddy <g3ddylee@gmail.com>",
+  "author": "Christopher 'Geddy' Lee <g3ddylee@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.1",
