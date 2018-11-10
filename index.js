@@ -13,7 +13,11 @@ const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const request = require('request');
 const crypto = require('crypto');
-const configSettings = require('./config/settings.js') || {};
+
+let configSettings = {};
+if (process.env.NODE_ENV !== 'production') {
+  configSettings = require('./config/settings.js');
+}
 
 var generateRandomString = function(length) {
   var text = '';
