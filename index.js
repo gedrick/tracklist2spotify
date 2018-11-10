@@ -13,6 +13,7 @@ const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const request = require('request');
 const crypto = require('crypto');
+const configSettings = require('./config/settings.js')
 
 var generateRandomString = function(length) {
   var text = '';
@@ -27,8 +28,7 @@ var stateKey = 'spotify_auth_state';
 
 // Encrypt / Decrypt
 const algorithm = 'aes-256-ctr';
-const password = 'LokiBoy2112!@#&^%$';
-
+const password = process.env.SALT || configSettings.salt;
 function encrypt(text){
   var cipher = crypto.createCipher(algorithm, password)
   var crypted = cipher.update(text, 'utf8', 'hex')
@@ -44,11 +44,15 @@ function decrypt(text){
 }
 
 // Set up Spotify api.
-const configSettings = require('./config/settings.js')
+const spotifyScopes = [
+  'playlist-read-private', 
+  'playlist-modify-private', 
+  'playlist-modify-public'
+];
 const spotifyApi = new SpotifyWebApi({
-  clientId: configSettings.clientId,
-  clientSecret: configSettings.clientSecret,
-  redirectUri: process.env.REDIRECT_URI || configSettings.redirectUri
+  clientId: process.env.SPOTIFY_CLIENT_ID || configSettings.clientId,
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET || configSettings.clientSecret,
+  redirectUri: process.env.SPOTIFY_REDIRECT_URI || configSettings.redirectUri
 })
 
 // Set up dust templating.
@@ -60,8 +64,6 @@ app.use(express.static('build'));
 app.use(cookieParser());
 app.use((req, res, next) => {
   if (req.cookies.access_token) {
-    console.log('access token was:' + spotifyApi.getAccessToken());
-    console.log('access token IS:' + req.cookies.access_token);
     spotifyApi.setAccessToken(decrypt(req.cookies.access_token));  
   }
   next();
@@ -83,16 +85,14 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   var state = generateRandomString(16)
   res.cookie(stateKey, state)
-  console.log('cookie set on /login: ' + state);
 
   // your application requests authorization
-  console.log(configSettings.spotifyScopes.join(' '))
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
-      client_id: configSettings.clientId,
-      scope: configSettings.spotifyScopes.join(' '),
-      redirect_uri: configSettings.redirectUri,
+      client_id: process.env.SPOTIFY_CLIENT_ID || configSettings.clientId,
+      scope: spotifyScopes.join(' '),
+      redirect_uri: process.env.SPOTIFY_REDIRECT_URI || configSettings.redirectUri,
       state: state,
       show_dialog: true
     }))
@@ -121,11 +121,11 @@ app.get('/callback', (req, res) => {
       url: 'https://accounts.spotify.com/api/token',
       form: {
         code: code,
-        redirect_uri: configSettings.redirectUri,
+        redirect_uri: process.env.SPOTIFY_REDIRECT_URI || configSettings.redirectUri,
         grant_type: 'authorization_code'
       },
       headers: {
-        'Authorization': 'Basic ' + (new Buffer(configSettings.clientId + ':' + configSettings.clientSecret).toString('base64'))
+        'Authorization': 'Basic ' + (new Buffer((process.env.SPOTIFY_CLIENT_ID || configSettings.clientId) + ':' + (process.env.SPOTIFY_CLIENT_SECRET || configSettings.clientSecret)).toString('base64'))
       },
       json: true
     };
@@ -133,10 +133,8 @@ app.get('/callback', (req, res) => {
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
         const access_token = body.access_token;
-        // const refresh_token = body.refresh_token;
 
         res.cookie('access_token', encrypt(access_token), { maxAge: 900000, httpOnly: true });
-        // res.cookie('refresh_token', refresh_token, { maxAge: 900000, httpOnly: true });
         res.redirect('/');
       } else {
         res.redirect('/#' +
@@ -153,7 +151,7 @@ app.get('/youtube', (req, res) => {
   const youtube = new YouTube()
   const type = req.query.type;
 
-  youtube.setKey(configSettings.youtubeKey)
+  youtube.setKey(process.env.YOUTUBE_KEY || configSettings.youtubeKey)
   if (type === 'video') {
     youtube.getById(req.query.id, (error, result) => {
       if (error) {
@@ -171,23 +169,23 @@ app.get('/youtube', (req, res) => {
 
 app.get('/searchTracks', (req, res) => {
   const tracklist = req.query.tracklist
-  console.log('/searchTracks hit, cookies:', req.cookies);
+  console.log('/searchTracks:', tracklist);
   Promise.all([
     Spotify.searchTracks(spotifyApi, tracklist),
     Spotify.getPlaylists()
-  ]).then(results => {
-    return res.render('track-table', {
-      tracks: results[0],
-      playlists: results[1]
-    })
-  })
-})
+  ]).then(results => res.render('track-table', {
+    tracks: results[0],
+    playlists: results[1]
+  }));
+});
 
 app.get('/addTracksToPlaylist', (req, res) => {
   const { method, playlistId, playlistName, trackArray } = req.query.options
+  console.log('/addTracksToPlaylist:', trackArray);
+  
   if (method === 'existingPlaylist') {
     spotifyApi.getMe()
-      .then(data => { return spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray) })
+      .then(data => spotifyApi.addTracksToPlaylist(data.body.id, playlistId, trackArray))
       .then(() => {
         res.send(JSON.stringify({ succeed: true, method: method }))
       })
@@ -196,8 +194,8 @@ app.get('/addTracksToPlaylist', (req, res) => {
       })
   } else {
     spotifyApi.getMe()
-      .then(data => { return spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false }) })
-      .then(data => { return spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray) })
+      .then(data => spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false }))
+      .then(data => spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray))
       .then(() => {
         res.send(JSON.stringify({ succeed: true, method: method }))
       })

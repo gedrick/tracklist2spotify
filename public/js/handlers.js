@@ -178,7 +178,6 @@ const addTracksToPlaylist = requestOps => {
 }
 
 const doneAddingTracks = res => {
-  console.log('Done adding tracks: ', res)
   const response = JSON.parse(res)
 
   if (response.succeed) {
