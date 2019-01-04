@@ -17,6 +17,7 @@
     "bluebird": "^3.5.1",
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
+    "cryptiles": "^4.1.2",
     "dustjs-express": "^0.1.0",
     "express": "^4.16.2",
     "lodash": "^4.17.5",
