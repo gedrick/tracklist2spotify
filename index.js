@@ -198,8 +198,8 @@ app.get('/addTracksToPlaylist', (req, res) => {
       })
   } else {
     spotifyApi.getMe()
-      .then(data => spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': false }))
-      .then(data => spotifyApi.addTracksToPlaylist(data.body.owner.id, data.body.id, trackArray))
+      .then(data => spotifyApi.createPlaylist(data.body.id, playlistName, { 'public': true }))
+      .then(data => spotifyApi.addTracksToPlaylist(data.body.id, trackArray))
       .then(() => {
         res.send(JSON.stringify({ succeed: true, method: method }))
       })
